@@ -1,0 +1,270 @@
+/* Main rules */
+.content-holder {
+    padding-top: 70px;
+}
+
+.clear-fix {
+    clear: both;
+}
+
+.dropdown-item {
+    white-space: normal;
+}
+
+/* End Main rules */
+/* Navbar */
+
+.navbar {
+    position: fixed;
+    z-index: 4;
+    width: 100%;
+}
+
+.notification {
+    position: relative;
+}
+
+.notification .notification-count {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 50%;
+    line-height: 50%;
+    padding: 5px;
+}
+
+.notifications-dropdown {
+    width: 700px;
+    background-color: #3490DC;
+    padding: 0;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.notifications-dropdown a {
+    padding: 5px;
+    border-bottom: 1px solid #FFF;
+    color: #FFF;
+}
+
+.notifications-dropdown a.not-seen {
+    background-color: #5353ff;
+}
+
+.notifications-dropdown a:last-of-type {
+    border-bottom: 0;
+}
+
+/* End Navbar */
+/* Guest page */
+
+.guest {
+    height: 721px;
+    background-image: url('../images/app/guest_background.jpg');
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-size: cover;
+    position: relative;
+}
+
+.guest .background-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.guest .background-text p {
+    font-size: 50px;
+    color: #FFF;
+}
+
+.guest .background-text .free {
+    color: #82ff9e;
+}
+
+.guest .background-text a {
+    font-size: 30px;
+}
+
+/* End guest page */
+
+/* Home page */
+.edit-comment {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+}
+
+.create-post .post-content::placeholder,
+.edit-post-form .post-content::placeholder,
+.edit-comment-form .post-content::placeholder,
+.edit-reply-form .post-content::placeholder {
+    color: #d6cc6c;
+    font-size: 18px;
+}
+
+.create-post .post-content,
+.edit-post-form .post-content,
+.edit-comment-form .post-content,
+.edit-reply-form .post-content {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    height: 150px;
+    outline: 0;
+    color: #FFF;
+    font-size: 18px;
+}
+
+.create-post .post-image,
+.edit-post-form .post-image,
+.edit-comment-form .post-image,
+.edit-reply-form .post-image {
+    width: 200px;
+    background-color: rgb(60, 60, 255);
+    margin: 10px 0
+}
+
+.edit-post-form .edit-btn,
+.edit-comment-form .edit-btn,
+.edit-reply-form .edit-btn {
+    width: 49%;
+}
+
+.post .poster {
+    color: #FFF;
+}
+
+.post .edit-post {
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.post .edit-post:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.post .post-like {
+    width: 100%;
+}
+
+.post .input-holder {
+    position: relative;
+}
+
+.post .input-holder .select-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #3490DC;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.comment, .reply {
+    position: relative;
+}
+
+.following-people, .following-sugestions {
+    background-color: #3490DC;
+    color: #FFF;
+    padding: 0 10px;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 635px;
+    position: fixed;
+    right: 0;
+    overflow-y: auto;
+}
+
+.following-sugestions {
+    left: 0;
+    direction: rtl;
+}
+
+.following-sugestions form,
+.following-sugestions .person {
+    direction: ltr;
+}
+
+.following-people .title,
+.following-sugestions .title{
+    padding: 10px 0;
+}
+
+.following-people .person,
+.following-sugestions .person {
+    padding: 8px 0;
+    border-bottom: 1px solid #FFF;
+}
+
+.following-people .person a,
+.following-sugestions .person a {
+    color: #FFF;
+}
+/* End Home page */
+
+/* Edit profile */
+form .edit-profile-img {
+    position: relative;
+    width: 50%;
+    margin: auto;
+    padding-bottom: 30px;
+}
+
+form .edit-profile-img i {
+    position: absolute;
+    bottom: 40px;
+    right: 160px;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #3490DC;
+    border-radius: 50%;
+    color: #FFF;
+    cursor: pointer;
+}
+/* End edit profile */
+
+/* Messages */
+.messages .message {
+    display: inline-block;
+    max-width: 90%;
+    border-radius: 5px;
+    padding: 3px 5px;
+    margin-bottom: 10px;
+}
+
+.messages .message.from-me {
+    background-color: #5050c9;
+}
+
+.messages .message.from-user {
+    background-color: #252558;
+}
+
+.messages .message .date {
+    font-size: 12px;
+}
+
+.last-messages {
+    direction: ltr;
+    padding: 0 8px;
+}
+
+.last-messages a {
+    text-decoration: none;
+}
+
+.last-messages a .messager:hover {
+    opacity: .7;
+}
+
+.last-messages .active {
+    border-radius: 5px;
+    border-bottom: 3px solid #333;
+}
+/* End Messages */
