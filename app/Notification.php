@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    protected $fillable = ['content', 'from_id', 'to_id'];
+    protected $fillable = ['content', 'from_id', 'to_id', 'seen', 'link'];
 
     /* Relationships */
 

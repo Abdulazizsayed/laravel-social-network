@@ -20,25 +20,28 @@ class LikeObserver
     {
         if ($like->user->id != auth()->user()->id) {
             if ($like->likeable_type == 'App\Post') {
-                $poster = Post::findOrFail($like->likable_id);
+                $post = Post::findOrFail($like->likable_id);
                 Notification::create([
                     'content' => auth()->user()->name . ' liked your post',
                     'from_id' => auth()->user()->id,
-                    'to_id' => $poster->id
+                    'to_id' => $post->user->id,
+                    'link' => 'http://127.0.0.1:8000/posts/' . $post->id
                 ]);
             } elseif ($like->likeable_type == 'App\Comment') {
-                $commenter = Comment::findOrFail($like->likable_id);
+                $comment = Comment::findOrFail($like->likable_id);
                 Notification::create([
                     'content' => auth()->user()->name . ' liked your comment',
                     'from_id' => auth()->user()->id,
-                    'to_id' => $commenter->id
+                    'to_id' => $comment->user->id,
+                    'link' => 'http://127.0.0.1:8000/posts/' . $comment->post->id . '#comment' . $comment->id
                 ]);
             } else {
-                $replier = Reply::findOrFail($like->likable_id);
+                $reply = Reply::findOrFail($like->likable_id);
                 Notification::create([
                     'content' => auth()->user()->name . ' liked your reply',
                     'from_id' => auth()->user()->id,
-                    'to_id' => $replier->id
+                    'to_id' => $reply->user->id,
+                    'link' => 'http://127.0.0.1:8000/posts/' . $reply->comment->post->id . '#reply' . $reply->id
                 ]);
             }
         }

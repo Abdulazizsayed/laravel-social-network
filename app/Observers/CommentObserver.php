@@ -21,7 +21,8 @@ class CommentObserver
             Notification::create([
                 'content' => auth()->user()->name . ' commented on your post',
                 'from_id' => auth()->user()->id,
-                'to_id' => $poster->id
+                'to_id' => $poster->id,
+                'link' => 'http://127.0.0.1:8000/posts/' . $comment->post->id . '#comment' . $comment->id,
             ]);
         }
     }

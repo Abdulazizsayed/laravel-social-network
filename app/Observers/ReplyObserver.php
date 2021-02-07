@@ -21,7 +21,8 @@ class ReplyObserver
             Notification::create([
                 'content' => auth()->user()->name . ' replied on your comment',
                 'from_id' => auth()->user()->id,
-                'to_id' => $commenter->id
+                'to_id' => $commenter->id,
+                'link' => 'http://127.0.0.1:8000/posts/' . $reply->comment->post->id . '#reply' . $reply->id
             ]);
         }
     }

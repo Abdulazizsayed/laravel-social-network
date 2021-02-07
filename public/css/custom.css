@@ -11,6 +11,10 @@
     white-space: normal;
 }
 
+.clear-fix {
+    clear: both;
+}
+
 /* End Main rules */
 /* Navbar */
 

@@ -57,7 +57,7 @@
                 </div>
             </div>
             {{-- End new post --}}
-            <div class="scrolling-pagination">
+            <div class="scrolling-pagination posts-holder">
                 @forelse ($posts as $post)
                 {{-- Start post --}}
                 <div class="card post post{{$post->id}} text-white bg-primary mb-3 mt-3">
@@ -70,7 +70,9 @@
                             <div class="col-md-10">
                                 {{-- Poster name --}}
                                 <a class="poster" href="{{ asset('users/profile/' . $post->user->id) }}"> {{ $post->user->name }}</a><br>
-                                <small>{{ $post->created_at->diffForHumans() }}</small>
+                                <a href="{{route('posts.show', $post->id)}}" class="text-light">
+                                    <small>{{ $post->created_at->diffForHumans() }}</small>
+                                </a>
                             </div>
                             {{-- If this is my post i can edit  --}}
                             @if (auth()->user()->posts->contains($post))
@@ -146,6 +148,7 @@
                                                         <small>{{ $like->created_at->diffForHumans() }}</small>
                                                     </div>
                                                     <div class="col-md-2">
+                                                        @if ($like->user->id != auth()->user()->id)
                                                         <form class="follow-form">
                                                             @csrf
                                                             <input type="number" name="followed_id" value="{{$like->user->id}}" hidden>
@@ -155,6 +158,7 @@
                                                             <button class="btn btn-light" name="submit" type="submit">Follow</button>
                                                             @endif
                                                         </form>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 @endforeach
@@ -224,7 +228,9 @@
                                 <div>
                                     {{-- commenter name --}}
                                     <a class="text-warning" href="{{ asset('users/profile/' . $comment->user->id) }}"> {{ $comment->user->name }}</a><br>
-                                    <small>{{ $comment->created_at->diffForHumans() }}</small>
+                                    <a href="{{route('posts.show', $post->id . "#comment" . $comment->id)}}" class="text-light">
+                                        <small>{{ $comment->created_at->diffForHumans() }}</small>
+                                    </a>
                                 </div>
                                 {{-- Edit comment form --}}
                                 <form class="edit-comment-form edit-comment-form{{$comment->id . $rand2}}" method="post" action="" enctype="multipart/form-data" autocomplete="off" hidden>
@@ -304,6 +310,7 @@
                                                                 <small>{{ $like->created_at->diffForHumans() }}</small>
                                                             </div>
                                                             <div class="col-md-2">
+                                                                @if ($like->user->id != auth()->user()->id)
                                                                 <form class="follow-form">
                                                                     @csrf
                                                                     <input type="number" name="followed_id" value="{{$like->user->id}}" hidden>
@@ -313,6 +320,7 @@
                                                                     <button class="btn btn-light" name="submit" type="submit">Follow</button>
                                                                     @endif
                                                                 </form>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -353,7 +361,9 @@
                                             <div>
                                                 {{-- Replier name --}}
                                                 <a class="text-warning" href="{{ asset('users/profile/' . $reply->user->id) }}"> {{ $reply->user->name }}</a><br>
-                                                <small>{{ $reply->created_at->diffForHumans() }}</small>
+                                                <a href="{{route('posts.show', $post->id . "#reply" . $reply->id)}}" class="text-light">
+                                                    <small>{{ $reply->created_at->diffForHumans() }}</small>
+                                                </a>
                                             </div>
                                             {{-- Edit reply form --}}
                                             <form class="edit-reply-form edit-reply-form{{$reply->id . $rand3}}" method="post" action="" enctype="multipart/form-data" autocomplete="off" hidden>
@@ -431,6 +441,7 @@
                                                                         <small>{{ $like->created_at->diffForHumans() }}</small>
                                                                     </div>
                                                                     <div class="col-md-2">
+                                                                        @if ($like->user->id != auth()->user()->id)
                                                                         <form class="follow-form">
                                                                             @csrf
                                                                             <input type="number" name="followed_id" value="{{$like->user->id}}" hidden>
@@ -440,6 +451,7 @@
                                                                             <button class="btn btn-light" name="submit" type="submit">Follow</button>
                                                                             @endif
                                                                         </form>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             @endforeach

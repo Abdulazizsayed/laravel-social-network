@@ -50,17 +50,27 @@ class PostController extends Controller
                 'user_id' => auth()->user()->id
             ]);
 
+            $image = '';
+
             if ($post && $request->hasFile('image')) {
+                $image = $request->image->store('images/posts', 'public');
                 Image::create([
                     'imageable_id' => $post->id,
                     'imageable_type' => 'App\Post',
-                    'file_name' => $request->image->store('images/posts', 'public')
+                    'file_name' => $image
                 ]);
+            }
+
+            $profile_image = '';
+            if (auth()->user()->image) {
+                $profile_image = auth()->user()->image->filename;
             }
 
             return response()->json([
                 'status' => 1,
-                'message' => "Post created successfuly"
+                'message' => "Post created successfuly",
+                'image' => $image,
+                'profile_image' => $profile_image
             ]);
         }
     }
@@ -73,7 +83,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show')->with([
+            'post' => $post,
+            'rand' => rand(),
+            'rand2' => rand(),
+            'rand3' => rand(),
+        ]);
     }
 
     /**

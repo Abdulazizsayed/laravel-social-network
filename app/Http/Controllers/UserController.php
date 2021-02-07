@@ -97,7 +97,8 @@ class UserController extends Controller
             Notification::create([
                 'content' => auth()->user()->name . ' followed you',
                 'from_id' => auth()->user()->id,
-                'to_id' => $user->id
+                'to_id' => $user->id,
+                'link' => 'http://127.0.0.1:8000/users/profile/' . $user->id
             ]);
             return response()->json([
                 'status' => 1,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent;
 use App\Image;
 use App\Message;
 use App\User;
@@ -43,6 +44,11 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+        // return response()->json([
+        //     'status' => 1,
+        //     'message' => "Message sent successfuly",
+        //     'image' => $request->all()
+        // ]);
         if (empty($request->content) && !$request->hasFile("image")) {
             return response()->json([
                 'status' => 0,
@@ -55,6 +61,8 @@ class MessageController extends Controller
                 'receiver_id' => $request->receiver_id
             ]);
 
+            $image = '';
+
             if ($message && $request->hasFile('image')) {
                 $image = $request->image->store('images/messages', 'public');
 
@@ -63,18 +71,12 @@ class MessageController extends Controller
                     'imageable_type' => 'App\Message',
                     'file_name' => $image
                 ]);
-
-                return response()->json([
-                    'status' => 1,
-                    'message' => "Message sent successfuly",
-                    'image' => $image
-                ]);
             }
 
             return response()->json([
                 'status' => 1,
                 'message' => "Message sent successfuly",
-                'image' => ''
+                'image' => $image
             ]);
         }
     }

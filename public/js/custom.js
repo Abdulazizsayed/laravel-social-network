@@ -25,10 +25,10 @@ if (input != null) {
 
 // New post ajax request
 $('#create-post').on('submit', function (e) {
+    e.preventDefault();
     let image = this['image'];
     let content = this['content'];
 
-    e.preventDefault();
     if (!content.value && !image.value) {
         alert("You can't post nothing!");
     } else {
@@ -61,7 +61,7 @@ $('#create-post').on('submit', function (e) {
     preview.hidden = true;
 });
 
-// New post ajax request
+// New like ajax request
 $(document).on('submit', '.create-like', function (e) {
     e.preventDefault();
     let submitBtn = this['submit'];
@@ -143,11 +143,6 @@ $(document).on('submit', '.create-message', function (e) {
     e.preventDefault();
     let content = this['content'];
     let img = this['image'];
-    // let previewCommentHolder = document.querySelector('.preview-comment' + this['post_id'].value);
-    // let previewImage = document.querySelector('.preview-comment-img' + this['post_id'].value);
-    // let previewLikeId = document.querySelector('.preview-comment-like-id' + this['post_id'].value);
-    // let previewContent = document.querySelector('.preview-comment-content' + this['post_id'].value);
-    // let commentFeedback = document.querySelector('.create-comment-msg' + this['post_id'].value) || null;
 
     if (!img.value && !content.value){
         alert("You can't send nothing!");
@@ -162,6 +157,7 @@ $(document).on('submit', '.create-message', function (e) {
             processData: false,
 
             success: function (data) {
+                // console.log(data);
                 let messagesHolder = document.querySelector('.messages-holder');
                 messagesHolder.insertAdjacentHTML('afterbegin', `
                 <div class="message from-me float-right">
@@ -171,6 +167,7 @@ $(document).on('submit', '.create-message', function (e) {
                     <img src="${ data.image ? '../../storage/' + data.image : '' }" width="100%" alt="Message photo"${ data.image ? '' : ' hidden'}>
                     <span class="text-info date">Just now</span>
                 </div>
+                <div class='clear-fix'></div>
                 `);
                 content.value = '';
                 img.value = '';
@@ -606,3 +603,21 @@ $(document).on('keyup', '#search-unfollowed', function (e) {
     document.getElementById("search-unfollowed-form").submit();
 });
 
+// Real-time message listen
+// window.Laravel = {'csrfToken': '{{csrf_token()}}'}
+// window.Echo.private(`message.${messageId}`)
+//     .listen('MessageSent', (e) => {
+//         console.log(e);
+//     });
+
+// Enable pusher logging - don't include this in production
+// Pusher.logToConsole = true;
+
+// var pusher = new Pusher('de0fea79fe5195a82b33', {
+//     cluster: 'eu'
+// });
+
+// var channel = pusher.subscribe(`message.{{}}`);
+// channel.bind('App\\Events\\MessageSent', function(data) {
+//     alert(JSON.stringify(data));
+// });

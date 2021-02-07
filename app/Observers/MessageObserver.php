@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\MessageSent;
 use App\Message;
 use App\Notification;
 
@@ -15,10 +16,20 @@ class MessageObserver
      */
     public function created(Message $message)
     {
+        $image = $message->image ? $message->image->file_name : '';
+        event(new MessageSent([
+            'message_id' => $message->id,
+            'content' => $message->content,
+            'image' => $image,
+            'sender_id' => auth()->user()->id,
+            'receiver_id' => $message->receiver_id,
+        ]));
+
         Notification::create([
             'content' => auth()->user()->name . ' send you a message',
             'from_id' => auth()->user()->id,
             'to_id' => $message->receiver->id,
+            'link' => 'http://127.0.0.1:8000/users/messages' . $message->sender->id
         ]);
     }
 

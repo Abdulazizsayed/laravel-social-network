@@ -10,9 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.jscroll.min.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{ asset('js/custom.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -38,15 +39,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        @auth
-                        <form class="form-inline ml-5 my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                        @endauth
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -158,6 +150,17 @@
                 }
             });
         });
+
+        // @auth
+        // Real-time message listen
+        window.Laravel = {'csrfToken': '{{csrf_token()}}'}
+
+        console.log(Echo);
+        Echo.private(`message.{{auth()->user()->id}}`)
+            .listen('MessageSent', (e) => {
+                console.log(e);
+            });
+        // @endauth
     </script>
 </body>
 </html>

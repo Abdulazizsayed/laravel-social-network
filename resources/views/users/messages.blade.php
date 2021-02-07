@@ -80,6 +80,7 @@
                             <span class="text-info date">At {{$message->created_at}}</span>
                         </div>
                         @endif
+                        <div class="clear-fix"></div>
                         @empty
                         <div class="alert alert-danger mt-5">No messages between you and {{$user->name}}!</div>
                         @endforelse
