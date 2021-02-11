@@ -35,6 +35,6 @@ class AppServiceProvider extends ServiceProvider
         Like::observe(LikeObserver::class);
         Reply::observe(ReplyObserver::class);
         Message::observe(MessageObserver::class);
-        view()->composer(["home", 'users.profile', 'users.editProfile', 'users.messages', 'posts.show'], "App\Http\ViewComposers\NavbarViewComposer");
+        view()->composer(["home", 'users.profile', 'users.editProfile', 'users.messages', 'posts.show', 'users.notifications'], "App\Http\ViewComposers\NavbarViewComposer");
     }
 }

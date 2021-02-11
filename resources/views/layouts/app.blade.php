@@ -67,7 +67,7 @@
                                     </a>
                                 @endforeach
                                 <div class="p-2 text-center">
-                                    <a href="{{asset('users/messages/')}}">See all messages</a> <!-- Link to be edited -->
+                                    <a href="{{asset('users/messages/' . $lastReceivedMessages[0]->sender->id)}}">See all messages</a> <!-- Link to be edited -->
                                 </div>
                             </div>
                         </li>
@@ -79,7 +79,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right notifications-dropdown" aria-labelledby="navbarDropdown">
                                 @foreach ($notifications as $notification)
-                                    <a class="dropdown-item{{$notification->seen ? '' : ' not-seen'}}" href="{{$notification->link}}"> <!-- Notification link to be added to db -->
+                                    <a class="dropdown-item{{$notification->seen ? '' : ' not-seen'}} notification" data-id="{{ $notification->id }}" href="{{$notification->link}}"> <!-- Notification link to be added to db -->
                                         <div class="row">
                                             <div class="col-md-1">
                                                 <img class="rounded-circle" src="{{ $notification->from->image ? asset('storage/' . $notification->from->image->file_name) : asset('storage/images/users/profile/default_user_photo.jpg') }}" width="50px" height="50px" alt="User photo">
@@ -91,7 +91,7 @@
                                     </a>
                                 @endforeach
                                 <div class="p-2 text-center">
-                                    <a href="/notifications">See all notifications</a> <!-- Notifications page to be added -->
+                                    <a href="{{asset("notifications")}}">See all notifications</a> <!-- Notifications page to be added -->
                                 </div>
                             </div>
                         </li>
@@ -153,13 +153,13 @@
 
         // @auth
         // Real-time message listen
-        window.Laravel = {'csrfToken': '{{csrf_token()}}'}
+        // window.Laravel = {'csrfToken': '{{csrf_token()}}'}
 
-        console.log(Echo);
-        Echo.private(`message.{{auth()->user()->id}}`)
-            .listen('MessageSent', (e) => {
-                console.log(e);
-            });
+        // console.log(Echo);
+        // Echo.private(`message.{{auth()->user()->id}}`)
+        //     .listen('MessageSent', (e) => {
+        //         console.log(e);
+        //     });
         // @endauth
     </script>
 </body>

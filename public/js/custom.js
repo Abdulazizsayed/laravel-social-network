@@ -603,6 +603,20 @@ $(document).on('keyup', '#search-unfollowed', function (e) {
     document.getElementById("search-unfollowed-form").submit();
 });
 
+// Seeing notification
+$(document).on('click', '.notification.not-seen', function (e) {
+    let id = this.dataset.id;
+
+    $.ajax({
+        url: "users/notifications/see/" + id,
+        type: "GET",
+        dataType: "JSON",
+        cache: false,
+        contentType: false,
+        processData: false,
+    });
+});
+
 // Real-time message listen
 // window.Laravel = {'csrfToken': '{{csrf_token()}}'}
 // window.Echo.private(`message.${messageId}`)

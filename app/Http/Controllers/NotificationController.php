@@ -14,7 +14,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.notifications')->with([
+            'notifications' => auth()->user()->notifications()->paginate(20)
+        ]);
     }
 
     /**
@@ -81,5 +83,11 @@ class NotificationController extends Controller
     public function destroy(Notification $notification)
     {
         //
+    }
+
+    public function seeNotification(Notification $notification)
+    {
+        $notification->seen = 1;
+        $notification->save();
     }
 }

@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('comments', 'CommentController');
     Route::resource('replies', 'ReplyController');
     Route::resource('messages', 'MessageController');
+    Route::resource('notifications', 'NotificationController');
     Route::post('/like', 'LikeController@toggleLike');
     // Toggle follow
     Route::post('users/toggleFollow/{user}', 'UserController@toggleFollow');
@@ -42,4 +43,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('users/updateProfile', 'ProfileController@update')->name('users.updateProfile');
     // Get message me and another user
     Route::get('users/messages/{user}', 'MessageController@index')->name('users.messages');
+    // See notificaiton
+    Route::get('users/notifications/see/{notification}', 'NotificationController@seeNotification');
 });
